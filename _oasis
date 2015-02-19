@@ -1,0 +1,31 @@
+OASISFormat: 0.4
+Name:        Impulsive
+Version:     0.2.0
+Synopsis:    Dynamic range and accuracy modeling for multi-dimensional linear
+  space-invariant systems
+Authors:     Gaël Deest
+License:     MIT
+Plugins:     DevFiles (0.4)
+
+Library impulsive
+  Path:           src/impulsive
+  CompiledObject: best
+  Pack:           true
+  Modules:        SystemGraph, Evaluation, Reachability, ImpulseResponse, IntervalPropagation, Noise, NoisePropagation, GraphViz
+  BuildDepends:   ocamlgraph
+  BuildTools:     ocamlbuild
+  
+Executable "test_impulsive"
+  Build$:         flag(tests)
+  Install:        false
+  CompiledObject: best
+  BuildDepends:   impulsive
+  Path:           src/test
+  BuildTools:     ocamlbuild
+  MainIs:         test.ml
+  
+Test "test_impulsive"
+  Run$:             flag(tests)
+  Command:          $test_impulsive 
+  WorkingDirectory: .
+  

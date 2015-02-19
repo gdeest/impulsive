@@ -1,0 +1,7 @@
+PKG ocamlgraph
+PKG batteries
+
+S src/impulsive
+S src/test
+B _build/src/impulsive
+B _build/src/test
