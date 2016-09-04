@@ -12,20 +12,32 @@ Library impulsive
   CompiledObject: best
   Pack:           true
   Modules:        SystemGraph, Evaluation, Reachability, ImpulseResponse, IntervalPropagation, Noise, NoisePropagation, GraphViz
-  BuildDepends:   ocamlgraph
+  BuildDepends:   ocamlgraph, xml-light, batteries
   BuildTools:     ocamlbuild
   
-Executable "test_impulsive"
-  Build$:         flag(tests)
+Flag "build_tests"
+  Description: "Build tests."
+  Default: true
+
+Executable "deriche"
+  Build$:         flag(build_tests)
   Install:        false
   CompiledObject: best
   BuildDepends:   impulsive
   Path:           src/test
   BuildTools:     ocamlbuild
-  MainIs:         test.ml
+  MainIs:         deriche.ml
   
-Test "test_impulsive"
-  Run$:             flag(tests)
-  Command:          $test_impulsive 
-  WorkingDirectory: .
+Test "deriche"
+  Command:          $deriche 
+  WorkingDirectory: ./test-output
+  
+Executable "fft"
+  Build$:         flag(build_tests)
+  Install:        false
+  CompiledObject: best
+  BuildDepends:   impulsive, batteries
+  Path:           src/test
+  BuildTools:     ocamlbuild
+  MainIs:         fft.ml
   

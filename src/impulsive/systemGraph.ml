@@ -2,6 +2,7 @@ open Graph
 
 type ('var_id, 'op_id) node =
 | Add of 'op_id
+| Sub of 'op_id    
 | Mul of 'op_id * float
 | Var of 'var_id
 
@@ -9,8 +10,10 @@ type ('var_id, 'op_id) node =
 type dep_vector = 
 | NullVector
 | Coords of (int array)
-    
-type 'var_id edge_label = (dep_vector * 'var_id list)
+
+type num_op = int
+
+type 'var_id edge_label = (dep_vector * num_op * 'var_id list)
 
 module type ID_TYPES = sig
   type var_id
@@ -47,7 +50,7 @@ module Make (M : ID_TYPES) = struct
   module Edge = struct
     type t      = et
     let compare = Pervasives.compare
-    let default = (NullVector, [])
+    let default = (NullVector, 0, [])
   end
 
   include Persistent.Digraph.ConcreteBidirectionalLabeled (Vertex) (Edge)

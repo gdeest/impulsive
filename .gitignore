@@ -1,6 +1,15 @@
 test-output/*
+_build/*
+_tags
 *~
 \#*\#
 .\#*
 auto-save-list
+*.mllib
+*.mlpack
+*.mldylib
+*.native
+*.dot
+setup.data
+setup.log
 

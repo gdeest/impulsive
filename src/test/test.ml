@@ -66,7 +66,7 @@ let () =
   List.iter (fun f -> Printf.printf "%f\n" f) coeffs
 
 let () =
-  let propagate = IP.propagate 1 ~radius:100 [(x, (-1.0, 1.0))] g in
+  let propagate = IP.propagate ~ndims:1 ~radius:100 g [(x, (-1.0, 1.0))] in
   let print_range v =
     let (a,b) = propagate v in
     let range_str = Printf.sprintf "[%f, %f]" a b in
@@ -79,7 +79,7 @@ let print_noise noise =
   | (lb, ub) ->
     Printf.printf "Range: [%f; %f]; Mean: %f; Variance: %f\n" lb ub noise.mean noise.variance
       
-let propagate = NP.propagate 1 ~radius:1000 ~computeRange:true g
+let propagate = NP.propagate ~ndims:1 ~radius:1000 ~computeRanges:true g
   
 let show_with_prec p =
   let noise_list = SG.fold_vertex (fun v lst ->

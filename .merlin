@@ -1,5 +1,5 @@
 PKG ocamlgraph
-PKG batteries
+PKG xml-light
 
 S src/impulsive
 S src/test
